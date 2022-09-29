@@ -36,14 +36,6 @@ public class SecurityConfig {
                 .antMatchers("/", "/**").permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/authenticate")
-                .usernameParameter("user")
-                .passwordParameter("pwd")
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/change_description_route")
                 .and()
                 .build();
     }

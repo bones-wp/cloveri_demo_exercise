@@ -19,6 +19,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
