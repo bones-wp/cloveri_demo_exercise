@@ -1,7 +1,7 @@
 package com.cloveri.demo_exercise.repo;
 
-import com.cloveri.demo_exercise.security.Role;
-import org.springframework.data.repository.CrudRepository;
+import com.cloveri.demo_exercise.entity.Role;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoleRepository extends CrudRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 }

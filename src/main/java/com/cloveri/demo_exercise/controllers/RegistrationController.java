@@ -1,36 +1,49 @@
 package com.cloveri.demo_exercise.controllers;
 
-import com.cloveri.demo_exercise.repo.UserRepository;
-import com.cloveri.demo_exercise.security.RegistrationForm;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.cloveri.demo_exercise.entity.User;
+import com.cloveri.demo_exercise.services.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/registration")
+@Tag(name = "Регистрация новых пользователей", description = "Позволяет регистрировать новых пользователей")
 public class RegistrationController {
 
-    private UserRepository userRepo;
-    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserService userService;
 
-    public RegistrationController(UserRepository userRepo, PasswordEncoder passwordEncoder) {
-        this.userRepo = userRepo;
-        this.passwordEncoder = passwordEncoder;
-    }
+    @GetMapping()
+    public String registration(Model model) {
+        model.addAttribute("userForm", new User());
 
-    @GetMapping
-    @ApiOperation(value = "Переход на страницу регистрации")
-    public String registerForm() {
         return "registration";
     }
 
-    @PostMapping
-    @ApiOperation(value = "Получение заполненной на странице регистрации формы и сохранение пользователя в БД")
-    public String processRegistration(RegistrationForm form) {
-        userRepo.save(form.toUser(passwordEncoder));
-        return "redirect:/login";
+    @PostMapping()
+    public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
+            model.addAttribute("passwordError", "Пароли не совпадают");
+            return "registration";
+        }
+        if (!userService.saveUser(userForm)){
+            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            return "registration";
+        }
+
+        return "redirect:/";
     }
 }

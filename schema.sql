@@ -10,6 +10,8 @@ CREATE TABLE USERS
     ID       SERIAL PRIMARY KEY NOT NULL,
     USERNAME varchar            NOT NULL,
     PASSWORD varchar            NOT NULL,
-    FULLNAME varchar            not null,
     ROLE     varchar
 );
+
+INSERT INTO USERS (ID, ROLE)
+VALUES (100260, 'ROLE_ADMIN');

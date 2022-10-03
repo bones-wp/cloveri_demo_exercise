@@ -4,3 +4,16 @@ spring:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/demo_cloveri}
     username: postgres
     password: root
+  jpa:
+    #выводит тела запросов к БД в консоль
+    show-sql: true
+    generate-ddl: false
+    #позволяет задать стратегию формирования БД на основе наших моделей, имеет разные значения (none, create, update и др.).
+    #update в данном случае значит, что таблицы БД и поля будут созданы на основе наших моделей и буду изменяться вместе с ними
+    hibernate.ddl-auto: update
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp

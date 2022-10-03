@@ -1,5 +1,9 @@
 package com.cloveri.demo_exercise.config;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +41,7 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build();
     }
+
     @Bean
     public InitializingBean removeSpringfoxHandlerProvider(DocumentationPluginsBootstrapper bootstrapper) {
         return () -> bootstrapper.getHandlerProviders().removeIf(WebMvcRequestHandlerProvider.class::isInstance);
@@ -58,5 +63,19 @@ public class SwaggerConfig {
         if (info.getPathPatternsCondition() == null) return info;
         String[] patterns = info.getPathPatternsCondition().getPatternValues().toArray(String[]::new);
         return info.mutate().options(new RequestMappingInfo.BuilderConfiguration()).paths(patterns).build();
+    }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("Clovery Demo Api")
+                        .version("1.0.0")
+                        .contact(new Contact()
+                                .email("j-thrash@ya.ru")
+                                .url("https://github.com/j-thrash")
+                                .name("Osmolovkiy Yuriy")
+                        )
+                );
     }
 }

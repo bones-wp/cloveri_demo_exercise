@@ -1,4 +1,4 @@
-package com.cloveri.demo_exercise.security;
+package com.cloveri.demo_exercise.services;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
