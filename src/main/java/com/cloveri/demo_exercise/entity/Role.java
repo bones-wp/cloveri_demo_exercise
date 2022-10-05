@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "ROLE_TABLE")
+@Table(name = "t_role")
 public class Role implements GrantedAuthority {
 
     @Id

@@ -16,7 +16,7 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor(access = AccessLevel.PUBLIC, force = true)
-@Table(name = "USERS")
+@Table(name = "t_user")
 @Schema(description = "Сущность пользователя")
 public class User implements UserDetails {
 
