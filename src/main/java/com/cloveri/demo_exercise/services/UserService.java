@@ -68,8 +68,6 @@ import java.util.Optional;
             }
             return false;
         }
-        public void insertRole(Long userId, Long roleId){
-        }
 
         public List<User> usergtList(Long idMin) {
             return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)

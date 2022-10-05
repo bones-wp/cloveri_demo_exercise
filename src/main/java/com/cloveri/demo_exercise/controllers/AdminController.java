@@ -31,15 +31,10 @@ public class AdminController {
         }
         return "redirect:/admin";
     }
-    @PostMapping("/admin")
+    @PostMapping()
     @Operation(summary = "Назначение ролей пользователей", description = "Позволяет назначить уровень доступа пользователей (пользователь с уровнем OPERATOR может изменять описание маршрута)")
-    public String roleUser(@RequestParam(required = true, defaultValue = "") Long userId,
-                           @RequestParam(required = true, defaultValue = "") Long roleId,
-                             @RequestParam(required = true, defaultValue = "") String action, Model model) {
-        if (action.equals("insert")) {
-            userService.insertRole(userId, roleId);
-        }
-        return "redirect:/admin";
+    public void roleUser() {
+        System.out.println("Назначение ролей");
     }
 
     @GetMapping("/admin/gt/{userId}")
