@@ -13,5 +13,11 @@ CREATE TABLE USERS
     ROLE     varchar
 );
 
-INSERT INTO USERS (ID, ROLE)
-VALUES (100260, 'ROLE_ADMIN');
+INSERT INTO t_role (ID, name)
+VALUES (1, 'ADMIN');
+
+INSERT INTO t_role (ID, name)
+VALUES (2, 'OPERATOR');
+
+INSERT INTO t_role (ID, name)
+VALUES (3, 'USER');
